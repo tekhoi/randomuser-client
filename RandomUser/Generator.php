@@ -25,7 +25,11 @@ class Generator {
 		return $this->getUser(User::FEMALE);
 	}
 
-	public function getMales($num) {
+    public function getNationalityUK() {
+        return $this->getUser(null, User::UK);
+    }
+
+    public function getMales($num) {
 		return $this->getUsers($num, (new Filter)->setGender(User::MALE));
 	}
 
@@ -36,13 +40,15 @@ class Generator {
 
 	// Worker methods
 
-	public function getUser($type=null) {
+	public function getUser($type=null,$nat=null) {
 		$params = [];
 
 		if (!is_null($type)) {
 			$params['gender'] = $type;
 		}
-
+        if (!is_null($nat)) {
+            $params['nat'] = $nat;
+        }
 		$json = $this->client->get('/', ['query' => $params])->json();
 
 		return $this->mapUser($json['results'][0]);

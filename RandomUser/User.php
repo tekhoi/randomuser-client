@@ -7,6 +7,7 @@ class User {
 	// Genders
 	const MALE = 'male';
 	const FEMALE = 'female';
+    const UK = 'GB';
 
 	private $gender;
 	private $firstName;
